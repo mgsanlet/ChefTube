@@ -11,7 +11,7 @@ import java.util.List;
  * Singleton class that manages a collection of {@link Recipe} objects.
  * Provides methods to initialize, register, and filter recipes.
  */
-public class RecipeModel implements Serializable {
+public class RecipeRepository implements Serializable {
 
     // -Singleton instance of the recipe list-
     private static List<Recipe> instance = null;

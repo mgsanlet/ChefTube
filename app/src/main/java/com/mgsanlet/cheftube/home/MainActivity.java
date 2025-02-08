@@ -6,12 +6,8 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -25,10 +21,9 @@ import com.mgsanlet.cheftube.R;
 import com.mgsanlet.cheftube.auth.AuthActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import java.util.List;
+
 import java.util.Locale;
-import model.Recipe;
-import model.RecipeModel;
+
 import model.User;
 /**
  * MainActivity serves as the primary activity for the application's home screen.
@@ -168,10 +163,10 @@ public class MainActivity extends AppCompatActivity {
         config.setLocale(new Locale(languageCode));
         res.updateConfiguration(config, res.getDisplayMetrics());
 
-        saveLanguage(languageCode); // Save the chosen language to SharedPreferences
+        saveLanguage(languageCode); // -Saving the chosen language to SharedPreferences-
 
         if (restartActivity) {
-            recreate(); // Restart activity only if requested
+            recreate(); // -Restarting activity only if requested-
         }
     }
 

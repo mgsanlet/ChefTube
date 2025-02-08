@@ -55,7 +55,7 @@ public class RecipeFeedAdapter extends RecyclerView.Adapter<RecipeFeedAdapter.Re
      * @param recipe The recipe whose details are to be displayed.
      */
     private void navToRecipeDetail(Recipe recipe) {
-        // Get the current visible fragment
+        // -Getting the current visible fragment-
         RecipeListFragment currentFragment = (RecipeListFragment) fragmentManager
                 .findFragmentById(R.id.mainFrContainer);
 
@@ -80,14 +80,13 @@ public class RecipeFeedAdapter extends RecyclerView.Adapter<RecipeFeedAdapter.Re
 
         public void bind(Recipe recipe) {
             title.setText(recipe.getTtlRId());
+            // -Loading recipe images with rounded corners using Glide-
             Glide.with(itemView.getContext())
                     .load(recipe.getImgRId())
                     .apply(RequestOptions.bitmapTransform(new RoundedCorners(40)))
                     .into(image);
 
-            image.setOnClickListener(v -> {
-                navToRecipeDetail(recipe);
-            });
+            image.setOnClickListener(v -> navToRecipeDetail(recipe));
         }
     }
 }

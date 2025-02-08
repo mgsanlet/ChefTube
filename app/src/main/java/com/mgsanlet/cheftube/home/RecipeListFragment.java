@@ -22,7 +22,7 @@ import com.mgsanlet.cheftube.home.recycler.RecipeFeedAdapter;
 import java.util.List;
 
 import model.Recipe;
-import model.RecipeModel;
+import model.RecipeRepository;
 
 /**
  * A fragment that displays a list of recipes. Each recipe is shown with its title and an image.
@@ -33,8 +33,6 @@ import model.RecipeModel;
  * @author MarioG
  */
 public class RecipeListFragment extends Fragment {
-    // -Declaring constant for argument key-
-    private static final String ARG_RECIPELIST = "recipeList";
     // -Declaring data members-
     private List<Recipe> recipeList;
     // -Declaring UI elements-
@@ -63,7 +61,7 @@ public class RecipeListFragment extends Fragment {
         // -Setting up the search button listener-
         searchButton.setOnClickListener(v -> setUpSearchBtn());
 
-        // -Checking if recipeList is null and retrieving default recipes from RecipeModel-
+        // -Checking if recipeList is null and retrieving default recipes from RecipeRepository-
         verifyRecipeList();
 
         RecipeFeedAdapter adapter = new RecipeFeedAdapter(recipeList, getParentFragmentManager());
@@ -75,11 +73,11 @@ public class RecipeListFragment extends Fragment {
     }
 
     /**
-     * Verifies the availability of the recipe list, falling back to RecipeModel if necessary.
+     * Verifies the availability of the recipe list, falling back to RecipeRepository if necessary.
      */
     private void verifyRecipeList() {
         if (this.recipeList == null) {
-            this.recipeList = RecipeModel.getInstance();
+            this.recipeList = RecipeRepository.getInstance();
         }
     }
 
@@ -108,7 +106,7 @@ public class RecipeListFragment extends Fragment {
         okBtn.setOnClickListener(v -> {
             String query = input.getText().toString().trim();
             // -Filtering the recipes based on the input query-
-            List<Recipe> filteredRecipes = RecipeModel.getFilteredRecipes(getContext(), query);
+            List<Recipe> filteredRecipes = RecipeRepository.getFilteredRecipes(getContext(), query);
 
             Toast.makeText(getContext(), resultsStr + filteredRecipes.size(),
                     Toast.LENGTH_SHORT
