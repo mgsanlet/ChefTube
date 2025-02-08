@@ -19,8 +19,9 @@ import model.UserDAO;
 
 /**
  * ProfileFragment allows the user to view and update their profile details,
- * including their username, email, and password.It is loaded at main activity
+ * including their username, email, and password. It is loaded in the main activity
  * when the profile option of BottomNavigationView is clicked.
+ *
  * @author MarioG
  */
 public class ProfileFragment extends Fragment {
@@ -49,7 +50,7 @@ public class ProfileFragment extends Fragment {
     /**
      * Creates a new instance of ProfileFragment with the given user.
      *
-     * @param user The user whose profile is to be displayed and edited.
+     * @param user The {@link User} whose profile is to be displayed and edited.
      * @return A new instance of ProfileFragment with the user data.
      */
     public static ProfileFragment newInstance(User user) {
@@ -94,13 +95,13 @@ public class ProfileFragment extends Fragment {
 
         // -Setting up listeners-
         saveBtn.setOnClickListener(v -> {
-            if(isValidData()){
+            if (isValidData()) {
                 // -Saving updated user data-
                 mUser.saveNewIdentity(
                         nameField.getText().toString(),
                         emailField.getText().toString()
                 );
-                if(!newPwdField.getText().toString().trim().isEmpty()){
+                if (!newPwdField.getText().toString().trim().isEmpty()) {
                     mUser.saveNewPassword(newPwdField.getText().toString());
                 }
                 UserDAO.updateUser(mUser, getContext()); // -Updating the user database-
@@ -114,7 +115,7 @@ public class ProfileFragment extends Fragment {
     /**
      * Loads the user's data into the respective fields.
      */
-    private void loadData(){ //TODO REDOC
+    private void loadData() {
         nameField.setText(mUser.getUsername());
         emailField.setText(mUser.getEmail());
     }
@@ -124,12 +125,12 @@ public class ProfileFragment extends Fragment {
      *
      * @return True if all data is valid, false otherwise.
      */
-    private boolean isValidData(){
-        return  (!fieldsAreEmpty()    &&
-                isValidEmail()        &&
+    private boolean isValidData() {
+        return (!fieldsAreEmpty() &&
+                isValidEmail() &&
                 !isExistentUsername() &&
-                !isExistentEmail()    &&
-                isValidPwd()          &&
+                !isExistentEmail() &&
+                isValidPwd() &&
                 pwdsMatch()
         );
     }
@@ -139,7 +140,7 @@ public class ProfileFragment extends Fragment {
      *
      * @return True if any field is empty, false otherwise.
      */
-    private boolean fieldsAreEmpty(){
+    private boolean fieldsAreEmpty() {
         boolean empty = false;
         if (nameField.getText().toString().trim().isEmpty()) {
             nameField.setError(requiredStr);
@@ -153,14 +154,11 @@ public class ProfileFragment extends Fragment {
             pwdField.setError(requiredStr);
             empty = true;
         }
-        /* -Checking if the new password field is filled but the
-        confirmation password field is empty */
         if (!newPwdField.getText().toString().trim().isEmpty() &&
                 newPwd2Field.getText().toString().trim().isEmpty()) {
             newPwd2Field.setError(requiredStr);
             empty = true;
         }
-        /* -Checking reverse */
         if (!newPwd2Field.getText().toString().trim().isEmpty() &&
                 newPwdField.getText().toString().trim().isEmpty()) {
             newPwdField.setError(requiredStr);
@@ -189,28 +187,28 @@ public class ProfileFragment extends Fragment {
      *
      * @return True if the email already exists, false otherwise.
      */
-    private boolean isExistentEmail(){ // TODO DOC
-        boolean isExistent = false;
+    private boolean isExistentEmail() {
         String inputEmail = emailField.getText().toString();
-
-        isExistent = UserDAO.isExistentEmail(inputEmail, getContext());
-
-        if (isExistent) {
+        boolean isExistent = UserDAO.isExistentEmail(inputEmail, getContext());
+        if (isExistent && !inputEmail.equals(mUser .getEmail())) {
             emailField.setError(emailAlreadyStr);
         }
-        return isExistent;
+        return isExistent && !inputEmail.equals(mUser .getEmail());
     }
 
-    private boolean isExistentUsername(){ // TODO DOC
-        boolean isExistent = false;
+    /**
+     * Checks if the entered username already exists in the system by comparing it with
+     * the usernames of all registered users.
+     *
+     * @return True if the username already exists, false otherwise.
+     */
+    private boolean isExistentUsername() {
         String inputUsername = nameField.getText().toString();
-
-        isExistent = UserDAO.isExistentUsername(inputUsername, getContext());
-
-        if (isExistent) {
+        boolean isExistent = UserDAO.isExistentUsername(inputUsername, getContext());
+        if (isExistent && !inputUsername.equals(mUser .getUsername())) {
             nameField.setError(usernameAlreadyStr);
         }
-        return isExistent;
+        return isExistent && !inputUsername.equals(mUser .getUsername());
     }
 
     /**
@@ -218,9 +216,9 @@ public class ProfileFragment extends Fragment {
      *
      * @return True if the password is valid, false otherwise.
      */
-    private boolean isValidPwd(){
+    private boolean isValidPwd() {
         boolean isValid = true;
-        if(newPwdField.getText().toString().trim().isEmpty()){
+        if (newPwdField.getText().toString().trim().isEmpty()) {
             return isValid; // -If the field is empty, password will remain unchanged-
         }
         if (newPwdField.getText().toString().length() < 5) {
@@ -235,13 +233,13 @@ public class ProfileFragment extends Fragment {
      *
      * @return True if passwords match, false otherwise.
      */
-    private boolean pwdsMatch(){
+    private boolean pwdsMatch() {
         boolean areMatching = true;
-        if(!pwdField.getText().toString().equals(mUser.getPassword())){
+        if (!pwdField.getText().toString().equals(mUser .getPassword())) {
             pwdField.setError(wrongPwdStr);
             return false;
         }
-        if(!newPwdField.getText().toString().equals(newPwd2Field.getText().toString())){
+        if (!newPwdField.getText().toString().equals(newPwd2Field.getText().toString())) {
             areMatching = false;
             newPwd2Field.setError(pwdDMatchStr);
         }

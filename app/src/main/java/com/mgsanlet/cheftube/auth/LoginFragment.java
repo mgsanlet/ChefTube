@@ -22,9 +22,9 @@ import com.mgsanlet.cheftube.R;
 /**
  * A fragment that handles the login process for the application.
  * It allows users to enter their credentials (username and password) and
- * logs them into the application.
- * Additionally, it provides a link to navigate to the sign-up fragment if the user
- * does not have an account.
+ * logs them into the application. Additionally, it provides a link to navigate
+ * to the sign-up fragment if the user does not have an account.
+ *
  * @author MarioG
  */
 public class LoginFragment extends Fragment {
@@ -45,13 +45,14 @@ public class LoginFragment extends Fragment {
     String invalidLoginStr;
 
     /**
-     * Creates a new instance of LoginFragment with the specified username and password.
-     * It is used from the SignUpFragment to prefill the login form with the user's credentials.
-     *  user  The username to be prefilled in the login form.
-     *  pwd The password to be prefilled in the login form.
-     * @return A new instance of LoginFragment with the provided username and password.
+     * Creates a new instance of LoginFragment with the specified user credentials.
+     * This method is used from the SignUpFragment to prefill the login form with
+     * the user's credentials.
+     *
+     * @param user The {@link User} object containing the username and password to be prefilled.
+     * @return A new instance of LoginFragment with the provided user credentials.
      */
-    public static LoginFragment newInstance(User user) { //TODO REDOC
+    public static LoginFragment newInstance(User user) {
         LoginFragment fragment = new LoginFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_USER, user);
@@ -64,7 +65,7 @@ public class LoginFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         // -Getting arguments passed to the fragment-
-        if(getArguments() != null){
+        if (getArguments() != null) {
             mUser = (User) getArguments().getSerializable(ARG_USER);
         }
     }
@@ -86,7 +87,7 @@ public class LoginFragment extends Fragment {
         invalidLoginStr = getString(R.string.invalid_login);
 
         // -Setting username and password if passed from the previous screen-
-        if(mUser != null){
+        if (mUser != null) {
             identityField.setText(mUser.getUsername());
             pwdField.setText(mUser.getPassword());
         }
@@ -98,18 +99,19 @@ public class LoginFragment extends Fragment {
             cleanErrors();
             FragmentNavigator.loadFragment(null, this, new SignUpFragment(), R.id.authFrContainer);
         });
-        Log.i("dbtest","Starting authentification activity...");
+        Log.i("dbtest", "Starting authentication activity...");
         UserDAO.logDBContent(getContext());
         return view;
     }
 
     /**
-     * Attempts to log the user in by validating their input and starting the main activity if credentials are correct.
+     * Attempts to log the user in by validating their input and starting the main activity
+     * if the credentials are correct. Displays a toast message if the login fails.
      */
-    private void tryLogin() { //TODO DOC
+    private void tryLogin() {
         if (fieldsAreEmpty()) return;
-        // -Getting the valid user if the credentials match-
 
+        // -Getting the valid user if the credentials match-
         User validUser = UserDAO.getValidUser(
                 identityField.getText().toString(),
                 pwdField.getText().toString(),
@@ -129,7 +131,7 @@ public class LoginFragment extends Fragment {
      *
      * @return True if any field is empty, false otherwise.
      */
-    private boolean fieldsAreEmpty(){
+    private boolean fieldsAreEmpty() {
         boolean empty = false;
         if (identityField.getText().toString().trim().isEmpty()) {
             identityField.setError(requiredStr);
@@ -145,7 +147,7 @@ public class LoginFragment extends Fragment {
     /**
      * Clears the error messages from the input fields (username and password).
      */
-    public void cleanErrors(){
+    public void cleanErrors() {
         identityField.setError(null);
         pwdField.setError(null);
     }
@@ -153,12 +155,12 @@ public class LoginFragment extends Fragment {
     /**
      * Navigates to the home page (MainActivity) with the valid user's data.
      *
-     * @param validUser The user that successfully logged in.
+     * @param validUser  The {@link User} object representing the user that successfully logged in.
      */
-    private void navToHomePage(User validUser) {
-        Log.i("dbtest","Logging in with id:" + validUser.getId());
-        mainActIntent.putExtra("user", validUser);
+    private void navToHomePage(User validUser ) {
+        Log.i("dbtest", "Logging in with id: " + validUser .getId());
+        mainActIntent.putExtra("user", validUser );
         startActivity(mainActIntent);
-        if(getActivity() != null) getActivity().finish();
+        if (getActivity() != null) getActivity().finish();
     }
 }
