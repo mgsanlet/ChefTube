@@ -84,13 +84,12 @@ public class HealthyFragment extends Fragment {
      * - Disables barcode image saving
      */
     private void startBarcodeScan() {
-        // Iniciar el escáner de ZXing
         IntentIntegrator integrator = IntentIntegrator.forSupportFragment(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
         integrator.setPrompt(scanPromptStr);
-        integrator.setCameraId(0);  // Usa la cámara trasera
-        integrator.setBeepEnabled(true);  // Sonido al escanear
-        integrator.setBarcodeImageEnabled(false);  // No guardar imagen del código
+        integrator.setCameraId(0);
+        integrator.setBeepEnabled(true);
+        integrator.setBarcodeImageEnabled(false);
         integrator.initiateScan();
     }
 
@@ -104,7 +103,7 @@ public class HealthyFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String barcode = "3017620422003"; // example
+        //String barcode = "3017620422003";  example
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() != null) {
@@ -121,16 +120,15 @@ public class HealthyFragment extends Fragment {
     private void fetchProductData() {
         String url = BASE_URL + currentBarcode;
 
-        // Crear una instancia de RequestQueue
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
-        // Crear una solicitud JSON
+        // -Creating JSON request-
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
                 null,
                 response -> {
-                    // Usar Gson para procesar la respuesta
+                    // -Using GSon to process the answer-
                     Log.d("API_RESPONSE", response.toString());
                     processResponse(response.toString(), currentBarcode);
                 },
@@ -141,7 +139,6 @@ public class HealthyFragment extends Fragment {
                     }
                 });
 
-        // Añadir la solicitud a la cola
         requestQueue.add(jsonObjectRequest);
     }
 
@@ -150,8 +147,8 @@ public class HealthyFragment extends Fragment {
      *
      * @param jsonResponse The JSON string response from the API
      */
-    private void processResponse(String jsonResponse, String currentBarcode) { //TODO DOC
-        // Usar Gson para mapear el JSON a una clase
+    private void processResponse(String jsonResponse, String currentBarcode) {
+        // -Using GSon to map the classes-
         Gson gson = new Gson();
         ProductResponse productResponse = gson.fromJson(jsonResponse, ProductResponse.class);
 
@@ -182,7 +179,7 @@ public class HealthyFragment extends Fragment {
     /**
      * Data class for mapping the API response structure
      */
-    public static class ProductResponse { //TODO DOC
+    public static class ProductResponse {
         private Product product;
 
         public Product getProduct() {
@@ -193,7 +190,7 @@ public class HealthyFragment extends Fragment {
     /**
      * Data class representing product information from the API
      */
-    public static class Product { //TODO DOC
+    public static class Product {
         private String product_name;
         private String nutriscore_grade;
         private String ecoscore_grade;
