@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recipeFeedRecyclerView"
-    android:background="@drawable/bg_splash"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="16dp"
-    android:scrollbars="vertical"/>
+    android:orientation="vertical"
+    android:background="@drawable/bg_splash">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recipeFeedRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:scrollbars="vertical"
+        android:background="@android:color/transparent"/>
+    <TextView
+        android:id="@+id/noResultsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_results"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:gravity="center"
+        android:background="@android:color/black"
+        android:padding="16dp"
+        />
+
+</LinearLayout>

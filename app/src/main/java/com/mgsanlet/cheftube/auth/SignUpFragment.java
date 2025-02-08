@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
 import androidx.fragment.app.Fragment;
+
 import model.User;
 import model.UserDAO;
 
@@ -20,6 +22,7 @@ import com.mgsanlet.cheftube.R;
  * It validates the input data and ensures that the email is not already in use.
  * After successful registration, the user is redirected to the login
  * fragment with credentials prefilled.
+ *
  * @author MarioG
  */
 public class SignUpFragment extends Fragment {
@@ -57,7 +60,7 @@ public class SignUpFragment extends Fragment {
 
         // -Setting up listeners-
         saveBtn.setOnClickListener(v -> {
-            if(isValidRegister()){
+            if (isValidRegister()) {
                 loadLoginFr();
             }
         });
@@ -73,11 +76,11 @@ public class SignUpFragment extends Fragment {
      * @return True if all validation checks pass, false otherwise.
      */
     private boolean isValidRegister() {
-        return (!fieldsAreEmpty()     &&
-                isValidEmail()        &&
-                !isExistentEmail()    &&
+        return (!fieldsAreEmpty() &&
+                isValidEmail() &&
+                !isExistentEmail() &&
                 !isExistentUsername() &&
-                isValidPwd()          &&
+                isValidPwd() &&
                 pwdsMatch()
         );
     }
@@ -88,7 +91,7 @@ public class SignUpFragment extends Fragment {
      *
      * @return True if any field is empty, false otherwise.
      */
-    private boolean fieldsAreEmpty(){
+    private boolean fieldsAreEmpty() {
         boolean empty = false;
         if (nameField.getText().toString().trim().isEmpty()) {
             nameField.setError(requiredStr);
@@ -129,11 +132,10 @@ public class SignUpFragment extends Fragment {
      *
      * @return True if the email already exists, false otherwise.
      */
-    private boolean isExistentEmail(){ // TODO DOC
-        boolean isExistent = false;
+    private boolean isExistentEmail() {
         String inputEmail = emailField.getText().toString();
 
-        isExistent = UserDAO.isExistentEmail(inputEmail, getContext());
+        boolean isExistent = UserDAO.isExistentEmail(inputEmail, getContext());
 
         if (isExistent) {
             emailField.setError(emailAlreadyStr);
@@ -141,11 +143,17 @@ public class SignUpFragment extends Fragment {
         return isExistent;
     }
 
-    private boolean isExistentUsername(){ // TODO DOC
-        boolean isExistent = false;
+    /**
+     * Checks if the entered username already exists in the system by comparing it with
+     * the usernames of all registered users.
+     *
+     * @return True if the username already exists, false otherwise.
+     */
+    private boolean isExistentUsername() {
+
         String inputUsername = nameField.getText().toString();
 
-        isExistent = UserDAO.isExistentUsername(inputUsername, getContext());
+        boolean isExistent = UserDAO.isExistentUsername(inputUsername, getContext());
 
         if (isExistent) {
             nameField.setError(usernameAlreadyStr);
@@ -158,7 +166,7 @@ public class SignUpFragment extends Fragment {
      *
      * @return True if the password is valid, false otherwise.
      */
-    private boolean isValidPwd(){
+    private boolean isValidPwd() {
         boolean isValid = true;
         if (pwdField.getText().toString().length() < 5) {
             pwdField.setError(shortPwdStr);
@@ -172,11 +180,11 @@ public class SignUpFragment extends Fragment {
      *
      * @return True if the passwords match, false otherwise.
      */
-    private boolean pwdsMatch(){
+    private boolean pwdsMatch() {
         boolean areMatching = false;
-        if(pwdField.getText().toString().equals(pwd2Field.getText().toString())){
+        if (pwdField.getText().toString().equals(pwd2Field.getText().toString())) {
             areMatching = true;
-        }else{
+        } else {
             pwd2Field.setError(pwdDMatchStr);
         }
         return areMatching;
@@ -192,13 +200,13 @@ public class SignUpFragment extends Fragment {
         User newUser = getNewUser();
         UserDAO.register(newUser, getContext());
         LoginFragment loginFr = LoginFragment.newInstance(newUser);
-        FragmentNavigator.loadFragmentInstance(null,this, loginFr, R.id.authFrContainer);
+        FragmentNavigator.loadFragmentInstance(null, this, loginFr, R.id.authFrContainer);
     }
 
     /**
      * Clears all error messages from the input fields (name, email, password).
      */
-    private void cleanErrors(){
+    private void cleanErrors() {
         nameField.setError(null);
         emailField.setError(null);
         pwdField.setError(null);
@@ -210,9 +218,9 @@ public class SignUpFragment extends Fragment {
      *
      * @return A new User object containing the registration details.
      */
-    private User getNewUser(){
+    private User getNewUser() {
         return new User(nameField.getText().toString(),
-                        emailField.getText().toString(),
-                        pwdField.getText().toString());
+                emailField.getText().toString(),
+                pwdField.getText().toString());
     }
 }
