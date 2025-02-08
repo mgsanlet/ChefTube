@@ -33,6 +33,12 @@
     <string name="contact_us">Contáctanos</string>
     <string name="language">Idioma</string>
     <string name="logout">Cerrar sesión</string>
+    <string name="start">Empezar</string>
+    <string name="reset">Reiniciar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="set">Aceptar</string>
+    <string name="pause">Pausar</string>
+    <string name="more_info">Más información</string>
     <string-array name="languages">
         <item>Inglés</item>
         <item>Español</item>
@@ -52,6 +58,10 @@
     <string name="scan_prompt">Escanea el código de barras</string>
     <string name="product_name">Nombre del producto:</string>
     <string name="product_not_found">Producto no encontrado</string>
+    <string name="set_timer">Indicar tiempo</string>
+    <string name="minutes">Minutos</string>
+    <string name="seconds">Segundos</string>
+    <string name="powered_by_open_food_facts_api">Recursos de Open Food Facts API</string>
 
     <!-- IMAGE ALTS -->
     <string name="app_name" translatable="false">ChefTube</string>

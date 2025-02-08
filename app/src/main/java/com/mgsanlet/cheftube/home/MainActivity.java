@@ -204,18 +204,12 @@ public class MainActivity extends AppCompatActivity {
                        this, null, profileFragment, R.id.mainFrContainer
                );
                return true;
-           } else if (item.getItemId() == R.id.search_item) {
-               setUpSearchBtn();
-               return true;
-           } else if (item.getItemId() == R.id.home_item) {
+           }  else if (item.getItemId() == R.id.home_item) {
                FragmentNavigator.loadFragment(
                        this, null, new RecipeListFragment(), R.id.mainFrContainer
                );
                return true;
-           } else if (item.getItemId() == R.id.chrono_item) {
-               Toast.makeText(this, featureInPrStr, Toast.LENGTH_SHORT).show();
-               return true;
-           } else if (item.getItemId() == R.id.health_item){
+           }  else if (item.getItemId() == R.id.health_item){
                FragmentNavigator.loadFragment(
                        this, null, new HealthyFragment(), R.id.mainFrContainer
                );
@@ -224,45 +218,6 @@ public class MainActivity extends AppCompatActivity {
                return false;
            }
        });
-    }
-
-    /**
-     * Sets up the search dialog to filter recipes based on user input.
-     */
-    private void setUpSearchBtn() {
-        AlertDialog.Builder searchDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-
-        // -Inflating a custom layout for the search dialog-
-        View dialogView = LayoutInflater.from(MainActivity.this)
-                .inflate(R.layout.dialog_search, null);
-        // -Attaching the custom layout to the dialog builder-
-        searchDialogBuilder.setView(dialogView);
-        // -Getting a reference to the UI elements in the custom layout-
-        EditText input = dialogView.findViewById(R.id.editTextSearch);
-        Button okBtn = dialogView.findViewById(R.id.okBtn);
-
-        AlertDialog searchDialog = searchDialogBuilder.create();
-        searchDialog.show();
-
-        okBtn.setOnClickListener(v -> {
-            String query = input.getText().toString().trim();
-            // -Filtering the recipes based on the input query-
-            List<Recipe> filteredRecipes = RecipeModel.getFilteredRecipes(
-                    MainActivity.this, query
-            );
-
-            Toast.makeText(this,resultsStr + filteredRecipes.size(),
-                    Toast.LENGTH_SHORT
-            ).show();
-
-            // -Creating a new fragment with the filtered recipes and replacing the current one-
-            Fragment recipeListFragment = RecipeListFragment.newInstance(filteredRecipes);
-            FragmentNavigator.loadFragmentInstance(
-                    this, null, recipeListFragment, R.id.mainFrContainer
-            );
-
-            searchDialog.dismiss();
-        });
     }
 }
 

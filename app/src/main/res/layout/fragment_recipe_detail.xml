@@ -1,85 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:background="@color/primary_orange">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_splash">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:padding="10dp"
+        android:layout_marginBottom="55dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:background="@drawable/black_bg_box_shape">
+
+            <TextView
+                android:id="@+id/recipeDetailTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="40dp">
+
+                <WebView
+                    android:id="@+id/recipeDetailVideo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/ingredientsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/ingredients"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:ignore="TextContrastCheck"/>
+
+            <LinearLayout
+                android:id="@+id/ingredientsLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/stepsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/steps"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:ignore="TextContrastCheck"/>
+
+            <LinearLayout
+                android:id="@+id/stepsLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Countdown Timer Layout -->
     <LinearLayout
+        android:id="@+id/timerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp"
-        android:background="#94000000">
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/black_bg_box_shape">
 
         <TextView
-            android:id="@+id/recipeDetailTitle"
-            android:layout_width="match_parent"
+            android:id="@+id/timerTextView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:layout_weight="4"
+            android:text="00:00"
+            android:textSize="30sp"
             android:textColor="@color/white"
-            />
+            android:gravity="center"/>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="40dp">
-
-            <WebView
-                android:id="@+id/recipeDetailVideo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/ingredientsTitle"
-            android:layout_width="match_parent"
+        <Button
+            style="@style/AuthBtns"
+            app:backgroundTint="@null"
+            android:id="@+id/startPauseButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/ingredients"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-
-            tools:ignore="TextContrastCheck"
-            />
-
-        <LinearLayout
-            android:id="@+id/ingredientsLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp">
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/stepsTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/steps"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-
-            tools:ignore="TextContrastCheck"
-            />
-
-        <LinearLayout
-            android:id="@+id/stepsLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp">
-        </LinearLayout>
-
+            android:text="@string/start"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"/>
     </LinearLayout>
-
-</ScrollView>
+</FrameLayout>

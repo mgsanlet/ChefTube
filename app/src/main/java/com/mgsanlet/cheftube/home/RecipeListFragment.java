@@ -4,9 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mgsanlet.cheftube.R;
 import com.mgsanlet.cheftube.home.recycler.RecipeFeedAdapter;
 
-import java.io.Serializable;
 import java.util.List;
 
 import model.Recipe;
@@ -32,36 +36,17 @@ public class RecipeListFragment extends Fragment {
     // -Declaring constant for argument key-
     private static final String ARG_RECIPELIST = "recipeList";
     // -Declaring data members-
-    private List<Recipe> mRecipeList;
+    private List<Recipe> recipeList;
     // -Declaring UI elements-
     private RecyclerView recipesRecycler;
-    private TextView noResultsTextView; // Added for no results message
-
-    /**
-     * Creates a new instance of the fragment with a list of recipes.
-     *
-     * @param recipeList A list of recipes to display.
-     * @return A new instance of RecipeListFragment.
-     */
-    public static Fragment newInstance(List<Recipe> recipeList) {
-        RecipeListFragment fragment = new RecipeListFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_RECIPELIST, (Serializable) recipeList);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private TextView noResultsTextView;
+    private ImageButton searchButton;
+    // -Declaring string resources-
+    private String resultsStr;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // -Getting the recipe list passed as an argument to the fragment-
-        if (getArguments() != null) {
-            try {
-                mRecipeList = (List<Recipe>) getArguments().getSerializable(ARG_RECIPELIST);
-            } catch (Exception e) {
-                System.err.println("Wrong casting from Serializable to List<Recipe>");
-            }
-        }
     }
 
     @Override
@@ -71,18 +56,21 @@ public class RecipeListFragment extends Fragment {
         recipesRecycler = view.findViewById(R.id.recipeFeedRecyclerView);
         noResultsTextView = view.findViewById(R.id.noResultsTextView);
         recipesRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        searchButton = view.findViewById(R.id.search_button);
+        // -Initializing string resources-
+        resultsStr = getString(R.string.results);
 
-        // -Checking if mRecipeList is null and retrieving default recipes from RecipeModel-
+        // -Setting up the search button listener-
+        searchButton.setOnClickListener(v -> setUpSearchBtn());
+
+        // -Checking if recipeList is null and retrieving default recipes from RecipeModel-
         verifyRecipeList();
 
-        if (mRecipeList.isEmpty()) {
-            displayNoResults();
-        } else {
-            RecipeFeedAdapter adapter = new RecipeFeedAdapter(mRecipeList, getParentFragmentManager());
-            recipesRecycler.setAdapter(adapter);
-            noResultsTextView.setVisibility(View.GONE); // -Hiding no results message-
-            recipesRecycler.setVisibility(View.VISIBLE); // -Showing RecyclerView-
-        }
+        RecipeFeedAdapter adapter = new RecipeFeedAdapter(recipeList, getParentFragmentManager());
+        recipesRecycler.setAdapter(adapter);
+        noResultsTextView.setVisibility(View.GONE); // -Hiding no results message-
+        recipesRecycler.setVisibility(View.VISIBLE); // -Showing RecyclerView-
+
         return view;
     }
 
@@ -90,8 +78,8 @@ public class RecipeListFragment extends Fragment {
      * Verifies the availability of the recipe list, falling back to RecipeModel if necessary.
      */
     private void verifyRecipeList() {
-        if (this.mRecipeList == null) {
-            this.mRecipeList = RecipeModel.getInstance();
+        if (this.recipeList == null) {
+            this.recipeList = RecipeModel.getInstance();
         }
     }
 
@@ -101,5 +89,41 @@ public class RecipeListFragment extends Fragment {
     private void displayNoResults() {
         noResultsTextView.setVisibility(View.VISIBLE); // -Showing the no results message-
         recipesRecycler.setVisibility(View.GONE); // -Hiding the RecyclerView-
+    }
+
+    private void setUpSearchBtn() {
+        AlertDialog.Builder searchDialogBuilder = new AlertDialog.Builder(getContext());
+
+        // -Inflating a custom layout for the search dialog-
+        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_search, null);
+        searchDialogBuilder.setView(dialogView);
+
+        // -Getting a reference to the UI elements in the custom layout-
+        EditText input = dialogView.findViewById(R.id.editTextSearch);
+        Button okBtn = dialogView.findViewById(R.id.okBtn);
+
+        AlertDialog searchDialog = searchDialogBuilder.create();
+        searchDialog.show();
+
+        okBtn.setOnClickListener(v -> {
+            String query = input.getText().toString().trim();
+            // -Filtering the recipes based on the input query-
+            List<Recipe> filteredRecipes = RecipeModel.getFilteredRecipes(getContext(), query);
+
+            Toast.makeText(getContext(), resultsStr + filteredRecipes.size(),
+                    Toast.LENGTH_SHORT
+            ).show();
+            if (filteredRecipes.isEmpty()) {
+                displayNoResults(); // Show no results message
+            } else {
+
+                RecipeFeedAdapter adapter = new RecipeFeedAdapter(filteredRecipes, getParentFragmentManager());
+                recipesRecycler.setAdapter(adapter);
+                noResultsTextView.setVisibility(View.GONE); // Hide no results message
+                recipesRecycler.setVisibility(View.VISIBLE); // Show RecyclerView
+            }
+
+            searchDialog.dismiss(); // Dismiss the dialog after search
+        });
     }
 }

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_splash">
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipeFeedRecyclerView"
@@ -27,4 +30,17 @@
         android:padding="16dp"
         />
 
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/search_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="start|top"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/black_bg_box_shape"
+        android:src="@drawable/ic_search_wh"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/search_icon"
+        tools:ignore="TouchTargetSizeCheck" />
+
+</FrameLayout>

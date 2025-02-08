@@ -16,7 +16,7 @@
         android:textStyle="bold"
         android:layout_weight="1"
         android:textColor="@color/white"
-        android:background="#94000000" />
+        android:background="@drawable/black_bg_box_shape" />
 
     <ImageView
         android:id="@+id/recipeImage"
