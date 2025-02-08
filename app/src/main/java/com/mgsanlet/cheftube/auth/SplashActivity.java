@@ -1,6 +1,9 @@
-package com.example.recipebook.auth;
+package com.mgsanlet.cheftube.auth;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
@@ -12,7 +15,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.recipebook.R;
+import com.mgsanlet.cheftube.R;
+
+import java.util.Locale;
+
 /**
  * SplashActivity is the introductory screen that appears when the application starts.
  * It displays a splash screen with an animated logo and title. The animations are applied
@@ -27,10 +33,17 @@ public class SplashActivity extends AppCompatActivity {
     // -Declaring animations-
     Animation animationLogo;
     Animation animationTitle;
+    // -Declaring shared preferences data-
+    private static final String PREFS_NAME = "AppPrefs";
+    private static final String LANGUAGE_KEY = "language";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Load the saved language and apply the locale
+        applySavedLocale();
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -52,5 +65,18 @@ public class SplashActivity extends AppCompatActivity {
             startActivity( new Intent(SplashActivity.this, AuthActivity.class) );
             finish();
         }, 2100);
+    }
+
+    /**
+     * Applies the saved language from SharedPreferences to the current configuration.
+     */
+    private void applySavedLocale() {
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String languageCode = preferences.getString(LANGUAGE_KEY, Locale.getDefault().getLanguage());
+        Resources res = getResources();
+        Configuration config = res.getConfiguration();
+        Locale locale = new Locale(languageCode);
+        config.setLocale(locale);
+        res.updateConfiguration(config, res.getDisplayMetrics());
     }
 }

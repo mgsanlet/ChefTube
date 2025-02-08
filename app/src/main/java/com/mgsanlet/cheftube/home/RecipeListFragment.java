@@ -1,20 +1,23 @@
-package com.example.recipebook.home;
+package com.mgsanlet.cheftube.home;
 
-import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.recipebook.FragmentNavigator;
-import com.example.recipebook.R;
+import com.mgsanlet.cheftube.FragmentNavigator;
+import com.mgsanlet.cheftube.R;
+import com.mgsanlet.cheftube.home.recycler.RecipeFeedAdapter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -33,7 +36,7 @@ public class RecipeListFragment extends Fragment {
     // -Declaring data members-
     private List<Recipe> mRecipeList;
     // -Declaring UI elements-
-    LinearLayout recipesLayout;
+    RecyclerView recipesRecycler;
 
     /**
      * Creates a new instance of the fragment with a list of recipes.
@@ -69,7 +72,8 @@ public class RecipeListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
         // -Initializing UI elements-
-        recipesLayout = view.findViewById(R.id.recipesLayout);
+        recipesRecycler = view.findViewById(R.id.recipeFeedRecyclerView);
+        recipesRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // -Checking if mRecipeList is null and retrieving default recipes from RecipeModel-
         verifyRecipeList();
@@ -77,7 +81,8 @@ public class RecipeListFragment extends Fragment {
         if(mRecipeList.isEmpty()){
             displayNoResults();
         }else{
-            displayRecipeList(inflater);
+            RecipeFeedAdapter adapter = new RecipeFeedAdapter(mRecipeList, getParentFragmentManager());
+            recipesRecycler.setAdapter(adapter);
         }
         return view;
     }
@@ -94,7 +99,7 @@ public class RecipeListFragment extends Fragment {
     /**
      * Displays a message indicating no results were found.
      */
-    private void displayNoResults() {
+    private void displayNoResults() { //TODO fix
         TextView noResults = new TextView(getContext());
         noResults.setText(R.string.no_results);
         if (getContext() != null){
@@ -102,48 +107,6 @@ public class RecipeListFragment extends Fragment {
         }
         noResults.setTextSize(20);
         noResults.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        recipesLayout.addView(noResults);
-    }
-
-    /**
-     * Displays the list of recipes dynamically.
-     *
-     * @param inflater The LayoutInflater used to inflate the recipe item views.
-     */
-    private void displayRecipeList(LayoutInflater inflater) {
-        for (final Recipe recipe : mRecipeList) {
-            @SuppressLint("InflateParams")
-            View recipeView = inflater.inflate(R.layout.item_recipe, null);
-            bindRecipeData(recipe, recipeView);
-
-            recipeView.setOnClickListener(v -> navToRecipeDetail(recipe));
-
-            recipesLayout.addView(recipeView);
-        }
-    }
-
-    /**
-     * Binds the recipe data (title and image) to the given recipe view.
-     *
-     * @param recipe The recipe to bind data from.
-     * @param recipeView The view to bind data to.
-     */
-    private static void bindRecipeData(Recipe recipe, View recipeView) {
-        TextView title = recipeView.findViewById(R.id.recipeTitle);
-        ImageView image = recipeView.findViewById(R.id.recipeImage);
-        title.setText(recipe.getTtlRId());
-        image.setImageResource(recipe.getImgRId());
-    }
-
-    /**
-     * Opens the detailed view of the selected recipe.
-     *
-     * @param recipe The recipe whose details are to be displayed.
-     */
-    private void navToRecipeDetail(Recipe recipe) {
-        RecipeDetailFragment detailFragment = RecipeDetailFragment.newInstance(recipe);
-        FragmentNavigator.loadFragmentInstance(
-                null, this, detailFragment, R.id.mainFrContainer
-        );
+        recipesRecycler.addView(noResults);
     }
 }

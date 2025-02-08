@@ -1,4 +1,4 @@
-package com.example.recipebook.auth;
+package com.mgsanlet.cheftube.auth;
 
 import android.os.Bundle;
 
@@ -8,7 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.recipebook.R;
+import com.mgsanlet.cheftube.R;
 /**
  * AuthActivity contains a background image, app logo and title images  and a fragment container
  * in which login fragment and register fragment are loaded.

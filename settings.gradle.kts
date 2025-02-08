@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "RecipeBook"
+rootProject.name = "cheftube"
 include(":app")
  

@@ -1,4 +1,4 @@
-package com.example.recipebook.home;
+package com.mgsanlet.cheftube.home;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import com.example.recipebook.R;
+import com.mgsanlet.cheftube.R;
 import model.Recipe;
 
 /**

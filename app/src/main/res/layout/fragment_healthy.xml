@@ -1,87 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/primary_orange"
+    android:layout_gravity="center"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/scanButton"
+        android:layout_width="150dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="82dp"
+        android:contentDescription="@string/scan_prompt"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_barcode"
+
+        />
+
+    <ImageView
+        android:id="@+id/productImageView"
+        android:layout_width="150dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="82dp"
+        />
+
+
+    <TextView
+        android:id="@+id/productNameTView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="@string/product_name"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
 
-        android:orientation="vertical"
-        android:background="@color/primary_orange"
-        android:padding="20dp">
+    <TextView
+        android:id="@+id/nutriscoreTView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="@string/nutriscore"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
 
-        <ImageView
-            android:id="@+id/imageDiet"
+    <TextView
+        android:id="@+id/ecoscoreTView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="@string/ecoscore"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
 
-            android:contentDescription="@string/healthy_diet"
-            android:scaleType="fitCenter"
-            android:src="@drawable/healthy_diet"
+</androidx.appcompat.widget.LinearLayoutCompat>
 
-            tools:ignore="ImageContrastCheck" />
 
-        <TextView
-            android:id="@+id/textTitle"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-
-            android:gravity="center"
-            android:text="@string/balanced_diet"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-
-            tools:ignore="TextContrastCheck" />
-
-        <TextView
-            android:id="@+id/textDescription1"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="20dp"
-
-            android:fontFamily="sans-serif-medium"
-            android:lineSpacingExtra="4dp"
-            android:text="@string/healthy_diet_advice1"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-
-            tools:ignore="TextContrastCheck,VisualLintLongText" />
-
-        <ImageView
-            android:id="@+id/imageDiet2"
-
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-
-            android:contentDescription="@string/healthy_diet"
-            android:scaleType="fitCenter"
-            android:src="@drawable/healthy_diet2"
-
-            tools:ignore="ImageContrastCheck" />
-
-        <TextView
-            android:id="@+id/textDescription2"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-
-            android:fontFamily="sans-serif-medium"
-            android:lineSpacingExtra="4dp"
-            android:text="@string/healthy_diet_advice2"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-
-            tools:ignore="TextContrastCheck,VisualLintLongText" />
-
-    </LinearLayout>
-</ScrollView>

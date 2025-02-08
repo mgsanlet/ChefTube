@@ -1,4 +1,4 @@
-package com.example.recipebook;
+package com.mgsanlet.cheftube;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

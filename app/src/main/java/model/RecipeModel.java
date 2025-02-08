@@ -2,7 +2,7 @@ package model;
 
 import android.content.Context;
 
-import com.example.recipebook.R;
+import com.mgsanlet.cheftube.R;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

@@ -3,10 +3,12 @@
     <string name="required">Required</string>
     <string name="invalid_email">Invalid email</string>
     <string name="email_already">Email already exists</string>
+    <string name="username_already">Username already exists</string>
     <string name="short_pwd">Password too short</string>
     <string name="pwd_d_match">Passwords don\'t match</string>
     <string name="no_email_app">No email app found</string>
     <string name="wrong_pwd">Wrong password</string>
+    <string name="invalid_login">Invalid Login</string>
 
     <!-- EDIT TEXTS -->
     <string name="username">Username</string>
@@ -47,6 +49,11 @@
     <string name="search_recipe">Search recipe:</string>
     <string name="ingredients">Ingredients</string>
     <string name="steps">Recipe steps</string>
+    <string name="scan_prompt">Scan barcode</string>
+    <string name="product_name">Product name:</string>
+    <string name="nutriscore" translatable="false">NutriScore:</string>
+    <string name="ecoscore" translatable="false">EcoScore:</string>
+    <string name="product_not_found">Product not found</string>
 
     <!-- IMAGE ALTS -->
     <string name="app_name" translatable="false">ChefTube</string>
@@ -126,8 +133,4 @@
     <string name="step_07_01">1. Sauté the Vegetables: In a pan, heat oil and sauté the diced red bell pepper and onion until softened.</string>
     <string name="step_07_02">2. Cook the Squid: Add the sliced squid to the pan and cook for 3–5 minutes until slightly tender.</string>
     <string name="step_07_03">3. Simmer in Sauce: Pour in the tomato sauce and season with paprika, salt, and pepper. Simmer for 15–20 minutes until the squid is tender and the flavors meld. Serve hot.</string>
-    <string name="start">Start</string>
-    <string name="select_valid_time">Select valid time</string>
-    <string name="stop">Stop</string>
-    <string name="invalid_login">Invalid Login</string>
 </resources>

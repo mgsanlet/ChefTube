@@ -12,10 +12,11 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:layout_weight="1"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:background="#94000000" />
 
     <ImageView
         android:id="@+id/recipeImage"

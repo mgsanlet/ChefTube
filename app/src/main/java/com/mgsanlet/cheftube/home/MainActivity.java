@@ -1,6 +1,7 @@
-package com.example.recipebook.home;
+package com.mgsanlet.cheftube.home;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -19,9 +20,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-import com.example.recipebook.FragmentNavigator;
-import com.example.recipebook.R;
-import com.example.recipebook.auth.AuthActivity;
+import com.mgsanlet.cheftube.FragmentNavigator;
+import com.mgsanlet.cheftube.R;
+import com.mgsanlet.cheftube.auth.AuthActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.List;
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     String noEmailAppStr;
     String featureInPrStr;
     String resultsStr;
+    // -Declaring shared preferences data-
+    private static final String PREFS_NAME = "AppPrefs";
+    private static final String LANGUAGE_KEY = "language";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
         }
         // -Setting up bottom navigation view-
         setUpBottomNav();
+    }
+
+    private void saveLanguage(String languageCode) {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(LANGUAGE_KEY, languageCode);
+        editor.apply();
     }
 
     /* ************************************************************
@@ -139,25 +150,29 @@ public class MainActivity extends AppCompatActivity {
         builder.setItems(languages, (dialog, which) -> {
             // -This code is executed when a language is selected-
             String selectedLanguage = languageCodes[which]; // -'which' is the item index-
-            setLocale(selectedLanguage); // -Setting the language of the app-
+            setLocale(selectedLanguage, true); // -Setting the language of the app-
         });
         builder.show();
     }
 
     /**
-     * Sets the app's locale to the specified language code and restarts the activity.
+     * Updates the app's locale to the specified language code (ISO 639-1) and optionally restarts
+     * the activity to apply changes. Saves the language preference in SharedPreferences.
      *
-     * @param languageCode The language code to set, e.g., "en", "es".
+     * @param languageCode    The language code to set (e.g., "en" for English, "es" for Spanish).
+     * @param restartActivity If true, the activity will be restarted to apply the new locale.
      */
-    private void setLocale(String languageCode) {
+    private void setLocale(String languageCode, boolean restartActivity) {
         Resources res = getResources();
-        // -Getting the current configuration of the app-
         Configuration config = res.getConfiguration();
         config.setLocale(new Locale(languageCode));
-        // -Updating the resources configuration with the new locale settings-
         res.updateConfiguration(config, res.getDisplayMetrics());
-        // -Restarting the activity-
-        recreate();
+
+        saveLanguage(languageCode); // Save the chosen language to SharedPreferences
+
+        if (restartActivity) {
+            recreate(); // Restart activity only if requested
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.example.recipebook;
+package com.mgsanlet.cheftube;
 
 import org.junit.Test;
 

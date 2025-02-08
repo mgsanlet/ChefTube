@@ -1,4 +1,4 @@
-package com.example.recipebook.home;
+package com.mgsanlet.cheftube.home;
 
 import android.os.Bundle;
 
@@ -12,10 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.recipebook.R;
+import com.mgsanlet.cheftube.R;
 
 import model.User;
-import model.UserModel;
+import model.UserDAO;
+
 /**
  * ProfileFragment allows the user to view and update their profile details,
  * including their username, email, and password.It is loaded at main activity
@@ -40,6 +41,7 @@ public class ProfileFragment extends Fragment {
     String requiredStr;
     String invalidEmailStr;
     String emailAlreadyStr;
+    String usernameAlreadyStr;
     String shortPwdStr;
     String pwdDMatchStr;
     String wrongPwdStr;
@@ -85,6 +87,7 @@ public class ProfileFragment extends Fragment {
         requiredStr = getString(R.string.required);
         invalidEmailStr = getString(R.string.invalid_email);
         emailAlreadyStr = getString(R.string.email_already);
+        usernameAlreadyStr = getString(R.string.username_already);
         shortPwdStr = getString(R.string.short_pwd);
         pwdDMatchStr = getString(R.string.pwd_d_match);
         wrongPwdStr = getString(R.string.wrong_pwd);
@@ -100,7 +103,7 @@ public class ProfileFragment extends Fragment {
                 if(!newPwdField.getText().toString().trim().isEmpty()){
                     mUser.saveNewPassword(newPwdField.getText().toString());
                 }
-                UserModel.updateUser(mUser); // -Updating the user model-
+                UserDAO.updateUser(mUser, getContext()); // -Updating the user database-
                 Toast.makeText(getContext(), dataSavedStr, Toast.LENGTH_SHORT).show();
             }
         });
@@ -111,7 +114,7 @@ public class ProfileFragment extends Fragment {
     /**
      * Loads the user's data into the respective fields.
      */
-    private void loadData(){
+    private void loadData(){ //TODO REDOC
         nameField.setText(mUser.getUsername());
         emailField.setText(mUser.getEmail());
     }
@@ -122,10 +125,11 @@ public class ProfileFragment extends Fragment {
      * @return True if all data is valid, false otherwise.
      */
     private boolean isValidData(){
-        return  (!fieldsAreEmpty()  &&
-                isValidEmail()      &&
-                !isExistentEmail()  &&
-                isValidPwd()        &&
+        return  (!fieldsAreEmpty()    &&
+                isValidEmail()        &&
+                !isExistentUsername() &&
+                !isExistentEmail()    &&
+                isValidPwd()          &&
                 pwdsMatch()
         );
     }
@@ -180,20 +184,33 @@ public class ProfileFragment extends Fragment {
     }
 
     /**
-     * Checks if the entered email already exists for another user.
+     * Checks if the entered email already exists in the system by comparing it with
+     * the emails of all registered users.
      *
-     * @return True if the email exists, false otherwise.
+     * @return True if the email already exists, false otherwise.
      */
-    private boolean isExistentEmail(){
-        String userInputEmail = emailField.getText().toString();
-        for(User user : UserModel.getInstance()){
-            if (user.getEmail().equals(userInputEmail) &&
-                    !user.getEmail().equals(mUser.getEmail())){
-                emailField.setError(emailAlreadyStr);
-                return true;
-            }
+    private boolean isExistentEmail(){ // TODO DOC
+        boolean isExistent = false;
+        String inputEmail = emailField.getText().toString();
+
+        isExistent = UserDAO.isExistentEmail(inputEmail, getContext());
+
+        if (isExistent) {
+            emailField.setError(emailAlreadyStr);
         }
-        return false;
+        return isExistent;
+    }
+
+    private boolean isExistentUsername(){ // TODO DOC
+        boolean isExistent = false;
+        String inputUsername = nameField.getText().toString();
+
+        isExistent = UserDAO.isExistentUsername(inputUsername, getContext());
+
+        if (isExistent) {
+            nameField.setError(usernameAlreadyStr);
+        }
+        return isExistent;
     }
 
     /**

@@ -3,6 +3,7 @@
     <string name="required">Obbligatorio</string>
     <string name="invalid_email">Email non valida</string>
     <string name="email_already">Email già esistente</string>
+    <string name="username_already">Username già esistente</string>
     <string name="short_pwd">Password troppo corta</string>
     <string name="pwd_d_match">Le password non corrispondono</string>
     <string name="no_email_app">Nessuna app per email trovata</string>
@@ -48,6 +49,9 @@
     <string name="search_recipe">Cerca ricetta:</string>
     <string name="ingredients">Ingredienti</string>
     <string name="steps">Fasi della ricetta</string>
+    <string name="scan_prompt">Scansiona il codice a barre</string>
+    <string name="product_name">Nome del prodotto:</string>
+    <string name="product_not_found">Prodotto non trovato</string>
 
     <!-- ALTERNATIVE IMMAGINI -->
     <string name="app_name" translatable="false">ChefTube</string>
@@ -128,4 +132,5 @@
     <string name="step_07_01">1. Soffriggi le verdure: In una padella, scalda l\'olio e soffriggi il peperone rosso e la cipolla a dadini finché non si ammorbidiscono.</string>
     <string name="step_07_02">2. Cuoci i calamari: Aggiungi i calamari affettati nella padella e cuoci per 3–5 minuti finché non sono leggermente teneri.</string>
     <string name="step_07_03">3. Fai sobbollire nella salsa: Versa la salsa di pomodoro e condisci con paprika, sale e pepe. Fai sobbollire per 15-20 minuti finché i calamari non sono teneri e i sapori non si amalgamano. Servi caldo.</string>
+
 </resources>

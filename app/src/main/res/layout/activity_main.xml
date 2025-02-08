@@ -53,7 +53,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mainFrContainer"
-        android:name="com.example.recipebook.home.RecipeListFragment"
+        android:name="com.mgsanlet.cheftube.home.RecipeListFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
 

@@ -3,6 +3,7 @@
     <string name="required">Requerido</string>
     <string name="invalid_email">Email inválido</string>
     <string name="email_already">El email ya existe</string>
+    <string name="username_already">El nombre de usuario ya existe</string>
     <string name="short_pwd">Contraseña muy corta</string>
     <string name="pwd_d_match">Las contraseñas no coinciden</string>
     <string name="no_email_app">No se encontró app de email</string>
@@ -48,6 +49,9 @@
     <string name="search_recipe">Buscar receta:</string>
     <string name="ingredients">Ingredientes</string>
     <string name="steps">Pasos de la receta</string>
+    <string name="scan_prompt">Escanea el código de barras</string>
+    <string name="product_name">Nombre del producto:</string>
+    <string name="product_not_found">Producto no encontrado</string>
 
     <!-- IMAGE ALTS -->
     <string name="app_name" translatable="false">ChefTube</string>
@@ -127,4 +131,6 @@
     <string name="step_07_01">1. Saltea las verduras: En una sartén, calienta aceite y saltea el pimiento rojo y la cebolla picados hasta que estén tiernos.</string>
     <string name="step_07_02">2. Cocina los calamares: Añade los calamares rebanados a la sartén y cocina durante 3–5 minutos hasta que estén ligeramente tiernos.</string>
     <string name="step_07_03">3. Cocina a fuego lento en salsa: Vierte la salsa de tomate y sazona con pimentón, sal y pimienta. Cocina a fuego lento durante 15-20 minutos hasta que los calamares estén tiernos y los sabores se mezclen. Sirve caliente.</string>
+
+
 </resources>
