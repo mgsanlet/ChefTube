@@ -59,7 +59,7 @@ public class SignUpFragment extends Fragment {
         pwdDMatchStr = getString(R.string.pwd_d_match);
 
         // -Setting up listeners-
-        saveBtn.setOnClickListener(v -> {
+        saveBtn.setOnClickListener(view1 -> {
             if (isValidRegister()) {
                 loadLoginFr();
             }

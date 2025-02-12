@@ -1,7 +1,9 @@
 package com.mgsanlet.cheftube.home;
 
-import android.annotation.SuppressLint;
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -25,6 +27,8 @@ import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.mgsanlet.cheftube.R;
+
+import java.util.Locale;
 
 /**
  * A fragment that provides functionality for scanning product barcodes and displaying
@@ -51,6 +55,9 @@ public class HealthyFragment extends Fragment {
 
     // -Declaring variables-
     private String currentBarcode;
+    // -Declaring shared preferences data-
+    private static final String PREFS_NAME = "AppPrefs";
+    private static final String LANGUAGE_KEY = "language";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,6 +109,7 @@ public class HealthyFragment extends Fragment {
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
         //String barcode = "3017620422003";  example
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -118,6 +126,8 @@ public class HealthyFragment extends Fragment {
      * Fetches product data from the Open Food Facts API using the scanned barcode
      */
     private void fetchProductData() {
+
+        // Forming the api request url based on barcode
         String url = BASE_URL + currentBarcode;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
@@ -148,12 +158,30 @@ public class HealthyFragment extends Fragment {
      * @param jsonResponse The JSON string response from the API
      */
     private void processResponse(String jsonResponse, String currentBarcode) {
+        SharedPreferences prefs = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String locale = prefs.getString(LANGUAGE_KEY, Locale.getDefault().getLanguage());
         // -Using GSon to map the classes-
         Gson gson = new Gson();
         ProductResponse productResponse = gson.fromJson(jsonResponse, ProductResponse.class);
+        String productName;
 
         if (productResponse.getProduct() != null) {
-            String productName = productResponse.getProduct().getProductName();
+            // -Assigning product name based on locale-
+            switch(locale){
+                case "es":{
+                    productName = productResponse.getProduct().getProductNameEs();
+                    break;
+                }
+                case "it":{
+                    productName = productResponse.getProduct().getProductNameIt();
+                    break;
+                }
+                default:{
+                    productName = productResponse.getProduct().getProductNameEn();
+                    break;
+                }
+            }
+
             String nutriScore = productResponse.getProduct().getNutriscoreGrade();
             String ecoScore = productResponse.getProduct().getEcoscoreGrade();
             productNameTView.setText(productNameStr + "\n" + productName);
@@ -171,7 +199,11 @@ public class HealthyFragment extends Fragment {
      * Opens the product page on Open Food Facts website in a browser
      */
     private void openProductPage() {
-        String productUrl = "https://world.openfoodfacts.org/product/" + currentBarcode;
+
+        SharedPreferences prefs = getActivity().getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String locale = prefs.getString(LANGUAGE_KEY, Locale.getDefault().getLanguage());
+        // -Forming web url based on locale and barcode-
+        String productUrl = "https://"+locale+".openfoodfacts.org/product/" + currentBarcode;
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(productUrl));
         startActivity(browserIntent);
     }
@@ -191,13 +223,24 @@ public class HealthyFragment extends Fragment {
      * Data class representing product information from the API
      */
     public static class Product {
-        private String product_name;
+        private String product_name_en;
+        private String product_name_es;
+        private String product_name_it;
         private String nutriscore_grade;
         private String ecoscore_grade;
 
-        public String getProductName() {
-            return product_name;
+        public String getProductNameEn() {
+            return product_name_en;
         }
+
+        public String getProductNameEs() {
+            return product_name_es;
+        }
+
+        public String getProductNameIt() {
+            return product_name_it;
+        }
+
 
         public String getNutriscoreGrade() {
             return nutriscore_grade;
