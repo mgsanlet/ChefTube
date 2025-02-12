@@ -22,7 +22,6 @@
     <string name="email_or_username">Email o usuario</string>
 
     <!-- BUTTON TEXTS -->
-    <string name="feature_in_progress">Función en progreso</string>
     <string name="results">Resultados: </string>
     <string name="data_saved">Datos guardados</string>
     <string name="ok">Aceptar</string>
@@ -34,7 +33,6 @@
     <string name="language">Idioma</string>
     <string name="logout">Cerrar sesión</string>
     <string name="start">Empezar</string>
-    <string name="reset">Reiniciar</string>
     <string name="cancel">Cancelar</string>
     <string name="set">Aceptar</string>
     <string name="pause">Pausar</string>
@@ -47,10 +45,6 @@
 
     <!-- PLAIN TEXTS -->
     <string name="dialog_title">Seleccionar idioma</string>
-    <string name="healthy_diet">Dieta saludable</string>
-    <string name="balanced_diet">Dieta equilibrada</string>
-    <string name="healthy_diet_advice1">Una dieta equilibrada no se trata solo de consumir diferentes grupos alimenticios; se trata de mantener proporción y moderación. Incluye verduras vibrantes como zanahorias, espinacas y pimientos. Combínalas con proteínas magras como pollo, pescado, frijoles o tofu para alimentar tus músculos. Los granos enteros como avena, quinoa y arroz integral proporcionan energía constante, mientras que frutas como manzanas, frutos rojos y naranjas aportan vitaminas esenciales.</string>
-    <string name="healthy_diet_advice2">Los productos lácteos como yogur y queso pueden aumentar los niveles de calcio, pero opta por opciones bajas en grasa para reducir la ingesta de grasas saturadas. Frutos secos, semillas y aguacates son excelentes fuentes de grasas saludables, que apoyan la función cerebral y la salud celular en general.\n\nPara asegurar variedad, prueba experimentar con cocinas internacionales, incorporando especias, hierbas y técnicas de cocción diversas.</string>
     <string name="no_results">Sin resultados</string>
     <string name="search_recipe">Buscar receta:</string>
     <string name="ingredients">Ingredientes</string>
@@ -64,12 +58,10 @@
     <string name="powered_by_open_food_facts_api">Recursos de Open Food Facts API</string>
 
     <!-- IMAGE ALTS -->
-    <string name="app_name" translatable="false">ChefTube</string>
     <string name="search_icon">Buscar</string>
     <string name="profile">Perfil</string>
     <string name="logo">Logo</string>
     <string name="home">Inicio</string>
-    <string name="chrono">Crono</string>
     <string name="healthy_advice">Salud</string>
     <string name="recipe_image">Imagen de receta</string>
 

@@ -10,6 +10,7 @@ import java.util.List;
  * Represents a recipe, containing details such as title, image, ingredients,
  * preparation steps, and a video URL.
  * This class is designed to be serializable for ease of storage and retrieval.
+ * @author MarioG
  */
 public class Recipe implements Serializable {
     private final int ttlRId;

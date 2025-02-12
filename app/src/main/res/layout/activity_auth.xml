@@ -13,7 +13,6 @@
     tools:ignore="VisualLintTextFieldSize">
 
     <ImageView
-        android:id="@+id/authLogo"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="36dp"
@@ -29,7 +28,6 @@
         tools:ignore="ImageContrastCheck" />
 
     <ImageView
-        android:id="@+id/authTtl"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="172dp"

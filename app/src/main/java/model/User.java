@@ -6,6 +6,7 @@ import java.util.UUID;
 /**
  * Represents a user with an ID, username, email, and password.
  * Provides methods to update user details and is serializable for easy storage and retrieval.
+ * @author MarioG
  */
 public class User implements Serializable {
     private final String id;

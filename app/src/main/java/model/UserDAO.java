@@ -14,6 +14,7 @@ import com.mgsanlet.cheftube.db.DataBaseHelper;
  * This class provides methods for registering new users, validating user credentials,
  * checking for existing usernames and emails, updating user information, and logging
  * the contents of the user database.
+ * @author MarioG
  */
 public class UserDAO {
 

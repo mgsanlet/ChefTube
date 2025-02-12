@@ -25,7 +25,6 @@
     <string name="seconds">secondi</string>
 
     <!-- TESTI DEI PULSANTI -->
-    <string name="feature_in_progress">Funzione in corso</string>
     <string name="results">Risultati: </string>
     <string name="data_saved">Dati salvati</string>
     <string name="ok">OK</string>
@@ -37,7 +36,6 @@
     <string name="language">Lingua</string>
     <string name="logout">Esci</string>
     <string name="start">Inizio</string>
-    <string name="reset">Riavviare</string>
     <string name="cancel">Annullare</string>
     <string name="set">Acettar</string>
     <string name="pause">Pausa</string>
@@ -50,10 +48,6 @@
 
     <!-- TESTI SEMPLICI -->
     <string name="dialog_title">Seleziona la lingua</string>
-    <string name="healthy_diet">Dieta sana</string>
-    <string name="balanced_diet">Dieta equilibrata</string>
-    <string name="healthy_diet_advice1">Una dieta equilibrata non riguarda solo il consumo di diversi gruppi alimentari, ma mantenere proporzioni e moderazione. Includi verdure colorate come carote, spinaci e peperoni. Abbinale a proteine magre come pollo, pesce, fagioli o tofu per alimentare i tuoi muscoli. I cereali integrali come avena, quinoa e riso integrale forniscono energia a lungo termine, mentre frutti come mele, bacche e arance offrono vitamine essenziali.</string>
-    <string name="healthy_diet_advice2">I latticini come yogurt e formaggio possono aumentare i livelli di calcio, ma scegli opzioni a basso contenuto di grassi per ridurre l\'assunzione di grassi saturi. Noci, semi e avocado sono ottime fonti di grassi sani, che supportano la funzione cerebrale e la salute cellulare. \n\nPer garantire varietà, prova a sperimentare con cucine internazionali, incorporando spezie, erbe e diverse tecniche di cottura.</string>
     <string name="no_results">Nessun risultato</string>
     <string name="search_recipe">Cerca ricetta:</string>
     <string name="ingredients">Ingredienti</string>
@@ -64,12 +58,10 @@
     <string name="powered_by_open_food_facts_api">Risorse di Open Food Facts API</string>
 
     <!-- ALTERNATIVE IMMAGINI -->
-    <string name="app_name" translatable="false">ChefTube</string>
     <string name="search_icon">Cerca</string>
     <string name="profile">Profilo</string>
     <string name="logo">Logo</string>
     <string name="home">Home</string>
-    <string name="chrono">Cronometro</string>
     <string name="healthy_advice">Salute</string>
     <string name="recipe_image">Immagine della ricetta</string>
 

@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Singleton class that manages a collection of {@link Recipe} objects.
  * Provides methods to initialize, register, and filter recipes.
+ * @author MarioG
  */
 public class RecipeRepository implements Serializable {
 

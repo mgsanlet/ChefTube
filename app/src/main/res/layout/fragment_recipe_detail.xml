@@ -42,7 +42,6 @@
             </FrameLayout>
 
             <TextView
-                android:id="@+id/ingredientsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -61,7 +60,6 @@
                 android:layout_marginBottom="20dp"/>
 
             <TextView
-                android:id="@+id/stepsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -83,7 +81,6 @@
 
     <!-- Countdown Timer Layout -->
     <LinearLayout
-        android:id="@+id/timerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -96,7 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="00:00"
+            android:text="@string/_00_00"
             android:textSize="30sp"
             android:textColor="@color/white"
             android:gravity="center"/>

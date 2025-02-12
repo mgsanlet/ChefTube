@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.mgsanlet.cheftube.FragmentNavigator;
 import com.mgsanlet.cheftube.R;
 import com.mgsanlet.cheftube.home.RecipeDetailFragment;
@@ -21,10 +21,14 @@ import com.mgsanlet.cheftube.home.RecipeListFragment;
 import java.util.List;
 
 import model.Recipe;
-
+/**
+ * Adapter for displaying a list of recipes in a RecyclerView.
+ * This adapter binds recipe data to the views in the RecyclerView.
+ * @author MarioG
+ */
 public class RecipeFeedAdapter extends RecyclerView.Adapter<RecipeFeedAdapter.RecipeViewHolder> {
-    private List<Recipe> recipeList;
-    private FragmentManager fragmentManager;
+    private final List<Recipe> recipeList;
+    private final FragmentManager fragmentManager;
 
     public RecipeFeedAdapter(List<Recipe> recipeList, FragmentManager fragmentManager) {
         this.recipeList = recipeList;

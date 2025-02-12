@@ -22,7 +22,6 @@
     <string name="email_or_username">Email or Username</string>
 
     <!-- BUTTON TEXTS -->
-    <string name="feature_in_progress">Feature in progress</string>
     <string name="results">Results: </string>
     <string name="data_saved">Data saved</string>
     <string name="ok">OK</string>
@@ -34,7 +33,6 @@
     <string name="language">Language</string>
     <string name="logout">Logout</string>
     <string name="start">Start</string>
-    <string name="reset">Reset</string>
     <string name="cancel">Cancel</string>
     <string name="set">Set</string>
     <string name="pause">Pause</string>
@@ -47,10 +45,6 @@
 
     <!-- PLAIN TEXTS -->
     <string name="dialog_title">Select Language</string>
-    <string name="healthy_diet">Healthy diet</string>
-    <string name="balanced_diet">Balanced Diet</string>
-    <string name="healthy_diet_advice1">A balanced diet is not just about consuming different food groups; it is about maintaining proportion and moderation. Include vibrant vegetables such as carrots, spinach, and bell peppers. Pair them with lean proteins like chicken, fish, beans, or tofu to fuel your muscles. Whole grains like oats, quinoa, and brown rice provide sustained energy, while fruits such as apples, berries, and oranges deliver essential vitamins.</string>
-    <string name="healthy_diet_advice2">Dairy products like yogurt and cheese can boost calcium levels, but opt for low-fat options to reduce saturated fat intake. Nuts, seeds, and avocados are excellent sources of healthy fats, which support brain function and overall cellular health.\n\nTo ensure variety, try experimenting with international cuisines, incorporating spices, herbs, and diverse cooking techniques.</string>
     <string name="no_results">No results</string>
     <string name="search_recipe">Search recipe:</string>
     <string name="ingredients">Ingredients</string>
@@ -72,7 +66,6 @@
     <string name="profile">Profile</string>
     <string name="logo">Logo</string>
     <string name="home">Home</string>
-    <string name="chrono">Chrono</string>
     <string name="healthy_advice">Health</string>
     <string name="recipe_image">Recipe image</string>
 
@@ -144,7 +137,7 @@
     <string name="step_07_01">1. Sauté the Vegetables: In a pan, heat oil and sauté the diced red bell pepper and onion until softened.</string>
     <string name="step_07_02">2. Cook the Squid: Add the sliced squid to the pan and cook for 3–5 minutes until slightly tender.</string>
     <string name="step_07_03">3. Simmer in Sauce: Pour in the tomato sauce and season with paprika, salt, and pepper. Simmer for 15–20 minutes until the squid is tender and the flavors meld. Serve hot.</string>
-
+    <string name="_00_00" translatable="false">00:00</string>
 
 
 </resources>

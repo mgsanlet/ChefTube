@@ -25,7 +25,6 @@
         app:menu="@menu/top_bar_menu" />
 
     <ImageButton
-        android:id="@+id/toolbar_logo"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -39,7 +38,6 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
-        android:id="@+id/toolbar_title"
         android:layout_width="180dp"
         android:layout_height="35dp"
         android:layout_marginTop="12dp"
